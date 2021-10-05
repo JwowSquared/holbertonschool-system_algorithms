@@ -1,3 +1,3 @@
-# holberton systen algorithms #
+# holberton system algorithms #
 
 FIX ME
