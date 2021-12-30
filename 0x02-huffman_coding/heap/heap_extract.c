@@ -16,7 +16,6 @@ void *heap_extract(heap_t *heap)
 		return (NULL);
 
 	out = heap->root;
-
 	while (out->left != NULL)
 	{
 		swap = out->left;
@@ -46,5 +45,7 @@ void *heap_extract(heap_t *heap)
 	free(swap);
 	heap->size = dest - 1;
 
+	if (heap->size == 0)
+		heap->root = NULL;
 	return (data);
 }
