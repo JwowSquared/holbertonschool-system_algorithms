@@ -1,4 +1,4 @@
-#include "huffman.c"
+#include "huffman.h"
 
 /**
 * symbol_create - creates a symbol for use in a Huffman tree
