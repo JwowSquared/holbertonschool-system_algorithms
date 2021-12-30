@@ -75,7 +75,7 @@ binary_tree_node_t *swap_up(heap_t *heap, binary_tree_node_t *out)
 
 	while (out->parent != NULL)
 	{
-		if (heap->data_cmp(out->data, out->parent->data) > 0)
+		if (heap->data_cmp(out->data, out->parent->data) >= 0)
 			break;
 		temp = out->data;
 		out->data = out->parent->data;
