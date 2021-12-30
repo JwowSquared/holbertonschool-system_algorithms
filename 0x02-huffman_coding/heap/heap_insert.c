@@ -46,6 +46,9 @@ binary_tree_node_t *find_parent(heap_t *heap, size_t idx, size_t dest)
 {
 	binary_tree_node_t *current;
 
+	if (idx == 1 && idx == dest)
+		return (NULL);
+
 	if (idx == 1)
 		return (heap->root);
 

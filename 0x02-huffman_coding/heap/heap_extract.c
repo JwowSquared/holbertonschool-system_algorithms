@@ -28,10 +28,7 @@ void *heap_extract(heap_t *heap)
 	}
 	swap = find_parent(heap, heap->size, heap->size);
 	if (swap == NULL)
-	{
 		swap = heap->root;
-		heap->root = NULL;
-	}
 	else if (heap->size % 2 == 0)
 	{
 		swap = swap->left;
@@ -45,5 +42,7 @@ void *heap_extract(heap_t *heap)
 	out->data = swap->data;
 	free(swap);
 	heap->size = heap->size - 1;
+	if (heap->size == 0)
+		heap->root = NULL;
 	return (data);
 }
