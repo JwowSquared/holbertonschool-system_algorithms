@@ -8,28 +8,31 @@
 */
 void *heap_extract(heap_t *heap)
 {
-	void *data;
-	size_t dest;
+	void *data, *temp;
 	binary_tree_node_t *out, *swap;
 
 	if (heap == NULL || heap->root == NULL)
 		return (NULL);
 
+	data = heap->root->data;
 	out = heap->root;
 	while (out->left != NULL)
 	{
 		swap = out->left;
 		if (out->right != NULL && heap->data_cmp(swap->data, out->right->data) > 0)
 			swap = out->right;
-		data = out->data;
+		temp = out->data;
 		out->data = swap->data;
-		swap->data = data;
+		swap->data = temp;
 		out = swap;
 	}
-
-	dest = heap->size;
-	swap = find_parent(heap, dest, dest);
-	if (dest % 2 == 0)
+	swap = find_parent(heap, heap->size, heap->size);
+	if (swap == NULL)
+	{
+		swap = heap->root;
+		heap->root = NULL;
+	}
+	else if (heap->size % 2 == 0)
 	{
 		swap = swap->left;
 		swap->parent->left = NULL;
@@ -39,13 +42,8 @@ void *heap_extract(heap_t *heap)
 		swap = swap->right;
 		swap->parent->right = NULL;
 	}
-
-	data = out->data;
 	out->data = swap->data;
 	free(swap);
-	heap->size = dest - 1;
-
-	if (heap->size == 0)
-		heap->root = NULL;
+	heap->size = heap->size - 1;
 	return (data);
 }
