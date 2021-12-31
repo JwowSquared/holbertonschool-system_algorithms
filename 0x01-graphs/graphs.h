@@ -77,4 +77,6 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str);
 int graph_add_edge(graph_t *g, const char *src, const char *dest, edge_e type);
 int create_edge(graph_t *graph, vertex_t *src, vertex_t *dest);
 
+void graph_delete(graph_t *graph);
+
 #endif /* _GRAPHS_H_ */
