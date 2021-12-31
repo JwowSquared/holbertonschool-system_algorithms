@@ -16,7 +16,7 @@ int huffman_codes(char *data, size_t *freq, size_t size)
 	if (h_tree == NULL)
 		return (0);
 
-	print_codes(h_tree, 0);
+	print_codes(h_tree, 0, 0);
 
 	tree_delete(h_tree, free);
 
@@ -27,8 +27,9 @@ int huffman_codes(char *data, size_t *freq, size_t size)
 * print_codes - prints the huffman codes associated with a huffman tree
 * @current: current node in tree
 * @code: current huffman code in decimal
+* @len: current length of huffman code, for printing
 */
-void print_codes(binary_tree_node_t *current, size_t code)
+void print_codes(binary_tree_node_t *current, size_t code, size_t len)
 {
 	symbol_t *sym;
 
@@ -40,25 +41,24 @@ void print_codes(binary_tree_node_t *current, size_t code)
 	if (sym->data != -1)
 	{
 		printf("%c: ", sym->data);
-		if (code != 0)
-			print_binary(code);
-		else
-			printf("0");
+		print_binary(code, 0, len);
 		printf("\n");
 	}
-	print_codes(current->left, code * 2 + 0);
-	print_codes(current->right, code * 2 + 1);
+	print_codes(current->left, code * 2 + 0, len + 1);
+	print_codes(current->right, code * 2 + 1, len + 1);
 }
 
 /**
-* print_binary - prints a decimal number in binary
-* @n: current number to print
+* print_binary - displays a number in its binary form, specifically len digits
+* @n: number to display
+* @depth: current recursive depth
+* @len: amount of digits to display
 */
-void print_binary(size_t n)
+void print_binary(size_t n, int depth, int len)
 {
-	if (n == 0)
+	if (depth == len)
 		return;
 
-	print_binary(n / 2);
+	print_binary(n / 2, depth + 1, len);
 	printf("%d", (int)n % 2);
 }
