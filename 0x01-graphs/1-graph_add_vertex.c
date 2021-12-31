@@ -12,7 +12,7 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str)
 	vertex_t *out, *current, *prev = NULL;
 	char *data;
 
-	if (graph == NULL)
+	if (graph == NULL || str == NULL)
 		return (NULL);
 
 	current = graph->vertices;
