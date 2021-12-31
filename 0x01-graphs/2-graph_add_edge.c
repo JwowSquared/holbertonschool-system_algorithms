@@ -2,21 +2,21 @@
 
 /**
 * graph_add_edge - creates an edge within a graph
-* @graph: pointer to graph struct
+* @g: pointer to graph struct
 * @src: string representing source vertex
 * @dest: string representing destination vertex
 * @type: determines whether the edge goes both ways or only one way
 *
 * Return: 1 on success, else 0
 */
-int graph_add_edge(graph_t *graph, const char *src, const char *dest, edge_type_t type)
+int graph_add_edge(graph_t *g, const char *src, const char *dest, edge_e type)
 {
 	vertex_t *current, *v_src = NULL, *v_dest = NULL;
 
-	if (graph == NULL || src == NULL || dest == NULL)
+	if (g == NULL || src == NULL || dest == NULL)
 		return (0);
 
-	current = graph->vertices;
+	current = g->vertices;
 	while (current != NULL)
 	{
 		if (v_src == NULL && !strcmp(current->content, src))
@@ -28,10 +28,10 @@ int graph_add_edge(graph_t *graph, const char *src, const char *dest, edge_type_
 		current = current->next;
 	}
 
-	if (!create_edge(graph, v_src, v_dest))
+	if (!create_edge(g, v_src, v_dest))
 		return (0);
 	if (type == BIDIRECTIONAL)
-		if (!create_edge(graph, v_dest, v_src))
+		if (!create_edge(g, v_dest, v_src))
 			return (0);
 
 	return (1);

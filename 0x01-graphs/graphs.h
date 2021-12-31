@@ -16,7 +16,7 @@ typedef enum edge_type_e
 {
 	UNIDIRECTIONAL = 0,
 	BIDIRECTIONAL
-} edge_type_t;
+} edge_e;
 
 /* Define the structure temporarily for usage in the edge_t */
 typedef struct vertex_s vertex_t;
@@ -74,7 +74,7 @@ graph_t *graph_create(void);
 
 vertex_t *graph_add_vertex(graph_t *graph, const char *str);
 
-int graph_add_edge(graph_t *graph, const char *src, const char *dest, edge_type_t type);
+int graph_add_edge(graph_t *g, const char *src, const char *dest, edge_e type);
 int create_edge(graph_t *graph, vertex_t *src, vertex_t *dest);
 
 #endif /* _GRAPHS_H_ */
