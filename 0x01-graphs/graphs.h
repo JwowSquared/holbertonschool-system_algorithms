@@ -16,7 +16,9 @@ typedef enum edge_type_e
 {
 	UNIDIRECTIONAL = 0,
 	BIDIRECTIONAL
-} edge_e;
+} edge_type_t;
+
+typedef edge_type_t edge_e;
 
 /* Define the structure temporarily for usage in the edge_t */
 typedef struct vertex_s vertex_t;
