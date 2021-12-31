@@ -18,6 +18,8 @@ int huffman_codes(char *data, size_t *freq, size_t size)
 
 	print_codes(h_tree, 0);
 
+	tree_delete(h_tree, free);
+
 	return (1);
 }
 
