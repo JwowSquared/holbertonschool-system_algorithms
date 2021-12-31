@@ -19,7 +19,7 @@ void *heap_extract(heap_t *heap)
 	while (out->left != NULL)
 	{
 		swap = out->left;
-		if (out->right != NULL && heap->data_cmp(swap->data, out->right->data) > 0)
+		if (out->right != NULL && heap->data_cmp(swap->data, out->right->data) >= 0)
 			swap = out->right;
 		temp = out->data;
 		out->data = swap->data;
