@@ -18,8 +18,6 @@ typedef enum edge_type_e
 	BIDIRECTIONAL
 } edge_type_t;
 
-typedef edge_type_t edge_e;
-
 /* Define the structure temporarily for usage in the edge_t */
 typedef struct vertex_s vertex_t;
 
@@ -70,6 +68,11 @@ typedef struct graph_s
 	vertex_t    *vertices;
 } graph_t;
 
+/* necessary to maintain prototype and betty */
+typedef graph_t g_t;
+typedef vertex_t v_t;
+typedef edge_type_t edge_e;
+
 void graph_display(const graph_t *graph);
 
 graph_t *graph_create(void);
@@ -80,5 +83,8 @@ int graph_add_edge(graph_t *g, const char *src, const char *dest, edge_e type);
 int create_edge(graph_t *graph, vertex_t *src, vertex_t *dest);
 
 void graph_delete(graph_t *graph);
+
+size_t depth_first_traverse(const g_t *g, void (*a)(const v_t *, size_t));
+size_t dft(const v_t *c, int *v, size_t d, void (*a)(const v_t *, size_t));
 
 #endif /* _GRAPHS_H_ */
