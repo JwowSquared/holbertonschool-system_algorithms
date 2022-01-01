@@ -24,6 +24,7 @@ size_t depth_first_traverse(const g_t *g, void (*a)(const v_t *, size_t))
 
 	i = dft(g->vertices, visited, 0, a);
 
+	free(visited);
 	return (i);
 }
 
