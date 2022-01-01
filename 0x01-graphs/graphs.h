@@ -87,4 +87,7 @@ void graph_delete(graph_t *graph);
 size_t depth_first_traverse(const g_t *g, void (*a)(const v_t *, size_t));
 size_t dft(const v_t *c, int *v, size_t d, void (*a)(const v_t *, size_t));
 
+size_t breadth_first_traverse(const g_t *g, void (*a)(const v_t *, size_t));
+int bft(const v_t *c, int *v, int n, int d, void (*a)(const v_t *, size_t));
+
 #endif /* _GRAPHS_H_ */
