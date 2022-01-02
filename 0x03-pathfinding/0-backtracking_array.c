@@ -37,13 +37,13 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 		}
 	}
 
-	out = helper(map, visited, rows, cols, -1, -1, start->x, start->y, target);
-	if (out == NULL)
-		return (NULL);
-
+	out = helper(map, visited, rows, cols, -1, -1, start->x, start->y, target);	
 	for (i = 0; i < rows; i++)
 		free(visited[i]);
 	free(visited);
+
+	if (out == NULL)
+		return (NULL);
 
 	tile = point_create(start->x, start->y);
 	if (tile == NULL)
