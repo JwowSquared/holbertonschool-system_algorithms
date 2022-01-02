@@ -13,6 +13,7 @@ queue_t *backtracking_graph(graph_t *graph,
 {
 	queue_t *out;
 	int *visited;
+	char *city;
 
 	if (!graph || !start || !target)
 		return (NULL);
@@ -26,7 +27,14 @@ queue_t *backtracking_graph(graph_t *graph,
 	if (out == NULL)
 		return (NULL);
 
-	if (queue_push_front(out, (void *)start->content) == NULL)
+	city = strdup(start->content);
+	if (city == NULL)
+	{
+		queue_delete(out);
+		return (NULL);
+	}
+
+	if (queue_push_front(out, (void *)city) == NULL)
 	{
 		queue_delete(out);
 		return (NULL);
@@ -64,8 +72,8 @@ queue_t *graph_bt(vertex_t const *v_current,
 		out = graph_bt(e_current->dest, target, visited);
 		if (out != NULL)
 		{
-			city = e_current->dest->content;
-			if (queue_push_front(out, (void *)city) == NULL)
+			city = strdup(e_current->dest->content);
+			if (city == NULL || queue_push_front(out, (void *)city) == NULL)
 			{
 				queue_delete(out);
 				return (NULL);
