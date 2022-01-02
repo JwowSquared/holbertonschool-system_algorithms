@@ -14,7 +14,6 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 	point_t const *start, point_t const *target)
 {
 	queue_t *out;
-	point_t *tile;
 	char **visited;
 	int i;
 
@@ -37,7 +36,7 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 		}
 	}
 
-	out = helper(map, visited, rows, cols, -1, -1, start->x, start->y, target);	
+	out = helper(map, visited, rows, cols, start->x, start->y, target);
 	for (i = 0; i < rows; i++)
 		free(visited[i]);
 	free(visited);
@@ -45,30 +44,17 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 	if (out == NULL)
 		return (NULL);
 
-	tile = point_create(start->x, start->y);
-	if (tile == NULL)
-	{
-		queue_delete(out);
-		return (NULL);
-	}
-
-	if (queue_push_front(out, (void *)tile) == NULL)
-	{
-		free(tile);
-		queue_delete(out);
-		return (NULL);
-	}
-
-	return (out);
+	return (create_and_push(out, start->x, start->y));
 }
 
 queue_t *helper(char **map, char **visited, int rows, int cols,
-	int px, int py, int x, int y, point_t const *target)
+	int x, int y, point_t const *target)
 {
 	queue_t *out = NULL;
-	point_t *tile = NULL;
 
-	if (visited[y][x])
+	if (x < 0 || x >= cols || y < 0 || y >= rows)
+		return (NULL);
+	if (map[y][x] == '1' || visited[y][x])
 		return (NULL);
 	visited[y][x] = 1;
 	printf("Checking coordinates [%d, %d]\n", x, y);
@@ -76,42 +62,45 @@ queue_t *helper(char **map, char **visited, int rows, int cols,
 	if (target->x == x && target->y == y)
 		return (queue_create());
 
-	if (x < cols - 1 && map[y][x + 1] == '0' && x + 1 != px)
-	{
-		out = helper(map, visited, rows, cols, x, y, x + 1, y, target);
-		if (out != NULL)
-			tile = point_create(x + 1, y);
-	}
-	if (out == NULL && y < rows - 1 && map[y + 1][x] == '0' && y + 1 != py)
-	{
-		out = helper(map, visited, rows, cols, x, y, x, y + 1, target);
-		if (out != NULL)
-			tile = point_create(x, y + 1);
-	}
-	if (out == NULL && x > 0 && map[y][x - 1] == '0' && x - 1 != px)
-	{
-		out = helper(map, visited, rows, cols, x, y, x - 1, y, target);
-		if (out != NULL)
-			tile = point_create(x - 1, y);
-	}
-	if (out == NULL && y > 0 && map[y - 1][x] == '0' && y - 1 != py)
-	{
-		out = helper(map, visited, rows, cols, x, y, x, y - 1, target);
-		if (out != NULL)
-			tile = point_create(x, y - 1);
-	}
+	out = helper(map, visited, rows, cols, x + 1, y, target);
+	if (out != NULL)
+		return (create_and_push(out, x + 1, y));
+	out = helper(map, visited, rows, cols, x, y + 1, target);
+	if (out != NULL)
+		return (create_and_push(out, x, y + 1));
+	out = helper(map, visited, rows, cols, x - 1, y, target);
+	if (out != NULL)
+		return (create_and_push(out, x - 1, y));
+	out = helper(map, visited, rows, cols, x, y - 1, target);
+	if (out != NULL)
+		return (create_and_push(out, x, y - 1));
+	return (NULL);
+}
 
-	if (tile != NULL)
-	{
-		if (queue_push_front(out, (void *)tile) == NULL)
-		{
-			queue_delete(out);
-			free(tile);
-			return (NULL);
-		}
+/**
+* create_and_push - creates a point and pushes onto the queue
+* @out: queue to push onto
+* @x: x coordinate of point to create
+* @y: y coordinate of point to create
+*
+* Return: pointer to queue, else NULL
+*/
+queue_t *create_and_push(queue_t *out, int x, int y)
+{
+	point_t *tile;
+
+	tile = malloc(sizeof(point_t));
+	if (tile == NULL)
+		return (NULL);
+
+	tile->x = x;
+	tile->y = y;
+
+	if (queue_push_front(out, (void *)tile) != NULL)
 		return (out);
-	}
 
+	queue_delete(out);
+	free(tile);
 	return (NULL);
 }
 

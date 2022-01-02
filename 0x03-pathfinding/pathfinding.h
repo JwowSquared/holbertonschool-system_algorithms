@@ -15,19 +15,19 @@
  */
 typedef struct point_s
 {
-    int x;
-    int y;
+	int x;
+	int y;
 } point_t;
 
-typedef queue_t q_t;
-typedef point_t p_t;
+queue_t *backtracking_array(char **map, int rows, int cols,
+	point_t const *start, point_t const *target);
+queue_t *helper(char **, char **, int, int, int, int, point_t const *);
+queue_t *create_and_push(queue_t *out, int x, int y);
 
-queue_t *backtracking_array(char **map, int rows, int cols, point_t const *start, point_t const *target);
-queue_t *helper(char **, char **, int, int, int, int, int, int, point_t const *);
-point_t *point_create(int, int);
+queue_t *backtracking_graph(graph_t *graph,
+	vertex_t const *start, vertex_t const *target);
 
-queue_t *backtracking_graph(graph_t *graph, vertex_t const *start, vertex_t const *target);
-
-queue_t *dijkstra_graph(graph_t *graph, vertex_t const *start, vertex_t const *target);
+queue_t *dijkstra_graph(graph_t *graph,
+	vertex_t const *start, vertex_t const *target);
 
 #endif /* _PATHFINDING_H_ */
