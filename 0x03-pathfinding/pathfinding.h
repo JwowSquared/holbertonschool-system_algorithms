@@ -23,7 +23,7 @@ typedef queue_t q_t;
 typedef point_t p_t;
 
 queue_t *backtracking_array(char **map, int rows, int cols, point_t const *start, point_t const *target);
-queue_t *helper(char **, int, int, int, int, int, int, point_t const *);
+queue_t *helper(char **, char **, int, int, int, int, int, int, point_t const *);
 point_t *point_create(int, int);
 
 queue_t *backtracking_graph(graph_t *graph, vertex_t const *start, vertex_t const *target);
