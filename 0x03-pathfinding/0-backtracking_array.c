@@ -49,24 +49,7 @@ queue_t *helper(char **map, int rows, int cols, int px, int py,
 	printf("Checking coordinates [%d, %d]\n", x, y);
 
 	if (target->x == x && target->y == y)
-	{
-		out = queue_create();
-		if (out == NULL)
-			return (NULL);
-		tile = point_create(x, y);
-		if (tile == NULL)
-		{
-			free(out);
-			return (NULL);
-		}
-		if (queue_push_front(out, (void *)tile) == NULL)
-		{
-			queue_delete(out);
-			free(tile);
-			return (NULL);
-		}
-		return (out);
-	}
+		return (queue_create());
 
 	if (x < cols - 1 && map[y][x + 1] == '0' && x + 1 != px)
 	{
