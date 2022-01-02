@@ -57,11 +57,11 @@ queue_t *helper(char **map, int rows, int cols, int px, int py,
 		if (out != NULL)
 			tile = point_create(x + 1, y);
 	}
-	if (out == NULL && y > 0 && map[y - 1][x] == '0' && y - 1 != py)
+	if (out == NULL && y < rows - 1 && map[y + 1][x] == '0' && y + 1 != py)
 	{
-		out = helper(map, rows, cols, x, y, x, y - 1, target);
+		out = helper(map, rows, cols, x, y, x, y + 1, target);
 		if (out != NULL)
-			tile = point_create(x, y - 1);
+			tile = point_create(x, y + 1);
 	}
 	if (out == NULL && x > 0 && map[y][x - 1] == '0' && x - 1 != px)
 	{
@@ -69,11 +69,11 @@ queue_t *helper(char **map, int rows, int cols, int px, int py,
 		if (out != NULL)
 			tile = point_create(x - 1, y);
 	}
-	if (out == NULL && y < rows - 1 && map[y + 1][x] == '0' && y + 1 != py)
+	if (out == NULL && y > 0 && map[y - 1][x] == '0' && y - 1 != py)
 	{
-		out = helper(map, rows, cols, x, y, x, y + 1, target);
+		out = helper(map, rows, cols, x, y, x, y - 1, target);
 		if (out != NULL)
-			tile = point_create(x, y + 1);
+			tile = point_create(x, y - 1);
 	}
 
 	if (tile != NULL)
