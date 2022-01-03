@@ -1,5 +1,7 @@
 #include "pathfinding.h"
 
+#include "djnode.c"
+
 /**
 * dijkstra_graph - determines the shortest route to target
 * @graph: graph to peruse
