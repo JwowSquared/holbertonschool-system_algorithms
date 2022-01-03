@@ -1,6 +1,10 @@
 #include "pathfinding.h"
 
 #include "djnode.c"
+#include "heap_create.c"
+#include "heap_insert.c"
+#include "heap_extract.c"
+#include "heap_delete.c"
 
 /**
 * dijkstra_graph - determines the shortest route to target
