@@ -36,7 +36,7 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 		}
 	}
 
-	out = helper(map, visited, rows, cols, start->x, start->y, target);
+	out = array_bt(map, visited, rows, cols, start->x, start->y, target);
 	for (i = 0; i < rows; i++)
 		free(visited[i]);
 	free(visited);
@@ -47,7 +47,7 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 	return (create_and_push(out, start->x, start->y));
 }
 
-queue_t *helper(char **map, char **visited, int rows, int cols,
+queue_t *array_bt(char **map, char **visited, int rows, int cols,
 	int x, int y, point_t const *target)
 {
 	queue_t *out = NULL;
@@ -62,16 +62,16 @@ queue_t *helper(char **map, char **visited, int rows, int cols,
 	if (target->x == x && target->y == y)
 		return (queue_create());
 
-	out = helper(map, visited, rows, cols, x + 1, y, target);
+	out = array_bt(map, visited, rows, cols, x + 1, y, target);
 	if (out != NULL)
 		return (create_and_push(out, x + 1, y));
-	out = helper(map, visited, rows, cols, x, y + 1, target);
+	out = array_bt(map, visited, rows, cols, x, y + 1, target);
 	if (out != NULL)
 		return (create_and_push(out, x, y + 1));
-	out = helper(map, visited, rows, cols, x - 1, y, target);
+	out = array_bt(map, visited, rows, cols, x - 1, y, target);
 	if (out != NULL)
 		return (create_and_push(out, x - 1, y));
-	out = helper(map, visited, rows, cols, x, y - 1, target);
+	out = array_bt(map, visited, rows, cols, x, y - 1, target);
 	if (out != NULL)
 		return (create_and_push(out, x, y - 1));
 	return (NULL);
