@@ -95,6 +95,7 @@ queue_t *dj(vertex_t const *start, vertex_t const *target,
 		if (route->distance > new_distance)
 		{
 			route->distance = new_distance;
+			route->from = current;
 			swap_up(routes, route_node);
 		}
 	}
