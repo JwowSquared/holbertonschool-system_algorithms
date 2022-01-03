@@ -55,4 +55,10 @@ djnode_t *djnode_create(vertex_t const *, djnode_t *, int);
 int djnode_cmp(void *, void *);
 binary_tree_node_t *find_route(binary_tree_node_t *, vertex_t *);
 
+#include "heap_create.c"
+#include "heap_delete.c"
+#include "heap_extract.c"
+#include "heap_insert.c"
+#include "djnode.c"
+
 #endif /* _PATHFINDING_H_ */
