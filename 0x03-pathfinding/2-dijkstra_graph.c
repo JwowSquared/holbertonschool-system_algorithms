@@ -72,7 +72,6 @@ queue_t *dj(vertex_t const *start, vertex_t const *target,
 
 	visited[current->node->index] = 1;
 	print_visit(current, start);
-
 	if (current->node == target)
 		return (create_path(current));
 
