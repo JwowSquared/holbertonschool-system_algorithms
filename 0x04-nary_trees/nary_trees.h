@@ -38,6 +38,8 @@ size_t dft(nary_tree_t const *node,
 size_t nary_tree_diameter(nary_tree_t const *root);
 size_t nt_diameter(nary_tree_t const *node, size_t *out);
 
+int path_exists(nary_tree_t const *root, char const * const *path);
+
 
 
 #endif /* _NARY_TREES_H_ */
